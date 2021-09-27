@@ -1,13 +1,13 @@
 version: "3"
 services:
-  api:
-    image: jeffrygonzalez/employeesapi:sep21
-    ports: 
-      - 80:80
-    environment: 
-      - nodeApi=http://node:3000
-      - ConnectionStrings__employees=server=sql;database=employees_docker;user=sa;password=TokyoJoe138!
-      - flags:future="true"
+  # api:
+  #   image: jeffrygonzalez/employeesapi:sep21
+  #   ports: 
+  #     - 80:80
+  #   environment: 
+  #     - nodeApi=http://node:3000
+  #     - ConnectionStrings__employees=server=sql;database=employees_docker;user=sa;password=TokyoJoe138!
+  #     - flags:future="true"
 
   node:
     image: jeffrygonzalez/node-api-on-call:2
@@ -18,3 +18,13 @@ services:
     image: jeffrygonzalez/sqlfor-employees:sep21
     ports:
       - 1433:1433
+
+  cache:
+    image: redis:latest
+    ports:
+      - 6381:6379
+
+  pricingworker:
+    image: paranoidandroid81/pricingworker:1
+    environment:
+      - redise=cache:6381
