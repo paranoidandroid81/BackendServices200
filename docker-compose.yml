@@ -15,7 +15,7 @@ services:
       - 3000:3000
 
   sql:
-    image: jeffrygonzalez/sqlfor-employees:sep21
+    image: jeffrygonzalez/sqlfor-employees:sep21-b
     ports:
       - 1433:1433
 
